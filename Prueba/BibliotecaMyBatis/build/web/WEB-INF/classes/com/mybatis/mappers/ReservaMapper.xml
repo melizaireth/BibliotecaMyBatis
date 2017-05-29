@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"  >
+<mapper namespace="com.mybatis.dao.ReservaDAO">
+    <insert id="nuevaReseva" parameterType="com.mybatis.vo.ReservaVO">
+        insert into reserva (dni, isbn_libro, fecha_solicitud, fecha_devolucion, penalizacion) values (#{dni},#{isbn_libro},#{fecha_solicitud},#{fecha_devolucion},#{penalizacion})
+    </insert>
+
+    <select id="getClienteByDNI" resultType="com.mybatis.vo.ReservaVO">
+        select * from reserva
+    </select>
+
+</mapper>
