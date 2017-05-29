@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cliente</title>
+    </h:head>
+    <h:body>
+        <header>
+            <h:panelGrid columns="2">
+            <h:graphicImage value="imagenes/biblioteca.jpg"/>
+            <h1>Bibloteca Pública de la Nación</h1>
+            </h:panelGrid>
+        </header>
+        <br/><br/>
+        <h:form id="formCliente">
+            <p:breadCrumb>
+            <p:menuitem value="Libros" url="/index.xhtml" />
+            <p:menuitem value="Reserva" url="/reserva.xhtml" />
+            <p:menuitem value="Clientes" url="/cliente.xhtml" />            
+        </p:breadCrumb>
+        <h1>Nuevo Cliente</h1>
+        <p:panelGrid columns="2">
+            <h:outputText value="DNI(*):"/>
+            <p:inputText value="#{clienteBeans.cliente.dni}" required="true" requiredMessage="El DNI es obligartorio">
+                <f:validateLength minimum="9" maximum="9"/>                
+            </p:inputText>
+            <h:outputText value="Nombre(*):"/>
+            <p:inputText value="#{clienteBeans.cliente.nombre}" required="true" requiredMessage="El nombre es obligatorio"/>
+                
+            <h:outputText value="Primer Apellido(*):"/>
+            <p:inputText value="#{clienteBeans.cliente.primer_apellido}" required="true" requiredMessage="El primer apellido es obligatorio"/>
+              
+            <h:outputText value="Segundo Apellido(*):"/>
+            <p:inputText value="#{clienteBeans.cliente.segundo_apellido}"/>
+              
+            <h:outputText value="Correo Electrónico:"/>
+            <p:inputText value="#{clienteBeans.cliente.email}">
+                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>                  
+            </p:inputText>
+            <h:outputText value="Movil(*):"/>
+            <p:inputText value="#{clienteBeans.cliente.movil}" required="true" requiredMessage="El nro de movil es obligatorio" />
+            <p:commandButton value="Guardar" update="formCliente" actionListener="#{clienteBeans.nuevoCLiente()}"></p:commandButton>
+            
+        </p:panelGrid>
+        <p:messages closable="true" showDetail="true" showSummary="true"/>
+        </h:form>
+    </h:body>
+</html>
+

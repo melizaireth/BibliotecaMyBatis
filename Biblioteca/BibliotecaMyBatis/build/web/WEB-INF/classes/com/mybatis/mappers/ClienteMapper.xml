@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"  >
+<mapper namespace="com.mybatis.dao.ClienteDAO">
+    <insert id="nuevoCliente" parameterType="com.mybatis.vo.ClienteVO">
+        insert into cliente (dni, nombre, primer_apellido, segundo_apellido, email, movil) values (#{dni}, #{nombre}, #{primer_apellido}, #{segundo_apellido}, #{email}, #{movil})     
+    </insert>
+
+    <select id="getClientes" resultType="com.mybatis.vo.ClienteVO">
+        select * from cliente
+    </select>
+    
+    <select id="getClienteByDNI" parameterType="String" resultType="com.mybatis.vo.ClienteVO">
+        select * from cliente where dni=#{dni}
+    </select>
+
+</mapper>

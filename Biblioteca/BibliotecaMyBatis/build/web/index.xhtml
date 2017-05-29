@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Mi Biblioteca</title>
+       
+        <link href="css/formu.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <header>
+            <h:panelGrid columns="2">
+            <h:graphicImage value="imagenes/biblioteca.jpg"/>
+            <h1>Bibloteca Pública de la Nación</h1>
+            </h:panelGrid>
+        </header>
+        <br/><br/>
+        <h:form id="formBiblioteca">
+
+        <p:breadCrumb>
+            <p:menuitem value="Libros" url="/index.xhtml" />
+            <p:menuitem value="Reserva" url="/reserva.xhtml" />
+            <p:menuitem value="Clientes" url="/cliente.xhtml" />            
+        </p:breadCrumb>
+        
+        <br/><br/>
+        <p:dataTable value="#{libroBeans.consultaLibros()}" var="cl" rows="20" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+            <p:column filterBy="#{cl.isbn}" headerText="ISBN">
+                <h:outputText value="#{cl.isbn}"/>
+            </p:column>
+            <p:column filterBy="#{cl.nombre_libro}" headerText="Nombre Libro">
+                <h:outputText value="#{cl.nombre_libro}"/>
+            </p:column>
+            <p:column filterBy="#{cl.autor}" headerText="Autor">
+                <h:outputText value="#{cl.autor}"/>
+            </p:column>
+            <p:column headerText="F.Publicacion">
+                <h:outputText value="#{cl.fecha_publicacion}" >
+                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+            <p:column  filterBy="#{cl.categoria}" headerText="Categoria">
+                <h:outputText value="#{cl.categoria}"/>
+            </p:column>
+            <p:column headerText="Stock">
+                <h:outputText value="#{cl.total_copias}"/>
+            </p:column>
+            <p:column headerText="Prestamos">
+                <h:outputText value="#{cl.prestamos}"/>
+            </p:column>
+
+        </p:dataTable>
+        <br/>
+        <br/>
+      
+        <br/>
+        <h1>Alta Nuevo Libro</h1>
+        
+        <p:panelGrid columns="2" class="cuadro">
+                <h:outputText value="IBSN:"/>
+                <p:inputText value="#{libroBeans.libro.isbn}" required="true">
+                    <f:validateLength minimum="10" />
+                </p:inputText>
+                <h:outputText value="Nombre:"/>
+                <p:inputText value="#{libroBeans.libro.nombre_libro}" required="true">
+                    <f:validateRegex pattern="[a-zA-Z]*"/>
+                </p:inputText>
+                <h:outputText value="Autor"/>
+                <p:inputText value="#{libroBeans.libro.autor}"/>
+                <h:outputText value="Fecha Publicación"/> 
+                <p:calendar id="button" value="#{libroBeans.libro.fecha_publicacion}" showOn="button" />
+               
+                <h:outputText value="Categoria"/> 
+                <p:inputText value="#{libroBeans.libro.categoria}" required="true">
+                    <f:validateRegex pattern="[a-zA-Z]*"/>
+                </p:inputText>
+                <h:outputText value=""/>
+                <p:commandButton value="Guardar" update="formBiblioteca" actionListener="#{libroBeans.guardarNuevoLibro()}"/>    
+                                
+
+            </p:panelGrid>
+            <p:messages closable="true" showDetail="true" showSummary="true"/>
+            <p:fileUpload fileUploadListener="#{libroBeans.handleFileUpload}" mode="advanced" dragDropSupport="false"
+           update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+            
+            <p:growl id="messages" showDetail="true" />           
+            
+        </h:form>
+    </h:body>
+</html>
+
