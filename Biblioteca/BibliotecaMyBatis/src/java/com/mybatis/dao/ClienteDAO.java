@@ -15,6 +15,6 @@ import java.util.List;
 public interface ClienteDAO {
     public void nuevoCliente(ClienteVO cvo);
     public List<ClienteVO> getClientes();
-    public ClienteVO getClienteByDNI();
+    public ClienteVO getClienteByDNI(String dni);
     
 }

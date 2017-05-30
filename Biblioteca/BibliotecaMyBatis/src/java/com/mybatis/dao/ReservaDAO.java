@@ -6,12 +6,13 @@
 package com.mybatis.dao;
 
 import com.mybatis.vo.ClienteVO;
+import com.mybatis.vo.ReservaVO;
 
 /**
  *
  * @author Melissa
  */
 public interface ReservaDAO {
-    public void nuevaReseva();
+    public void nuevaReseva(ReservaVO rvo);
     public ClienteVO getReservaByDNI();
 }
