@@ -48,8 +48,22 @@ public class ClienteBO implements ClienteDAO{
     }
 
     @Override
-    public ClienteVO getClienteByDNI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ClienteVO getClienteByDNI(String dni) {
+        ClienteVO cliente = new ClienteVO();
+        SqlSession session = new MapperUtil().getSession();
+        if(session!=null){
+            try{                
+                
+                cliente = (ClienteVO) session.selectOne("com.mybatis.dao.ClienteDAO.getClienteByDNI", dni);
+                session.commit();
+                
+            }finally{
+                session.close();
+            }
+        }else{
+            //enviar mensaje
+        }
+        return cliente;
     }
     
 }

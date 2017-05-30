@@ -63,5 +63,48 @@ public class LibroBO implements LibroDAO{
         }
         return libros;
     }
+
+    @Override
+    public LibroVO getLibroByIsbn(String isbn) {
+        SqlSession session = new MapperUtil().getSession();
+        LibroVO libro = new LibroVO();
+        if(session!=null){
+            try{
+                
+                libro =  session.selectOne("com.mybatis.dao.LibroDAO.getLibroByIsbn", isbn);               
+              
+            }finally{
+                session.close();
+            }
+        }else{
+            //enviar mensaje
+        }
+        return libro;
+    }
+
+    @Override
+    public void updateReserva(int tipo, LibroVO libro) {
+        SqlSession session = new MapperUtil().getSession();
+        if(session!=null){
+            try{
+                //Debemos validar que el libro                
+              
+                if(LibroDAO.TIPO_RESERVA ==1){
+                 //Aqui verificamos que si existe el libro es un nuevo ejemplar
+                    
+                    int update = session.update("com.mybatis.dao.LibroDAO.updatePrestamo", libro);     
+                    //falta validar la actualizacion dle libro para enviar mensaje
+                }else{
+                   int update = session.update("com.mybatis.dao.LibroDAO.updatePrestamo", libro);    
+                }
+                
+                session.commit();
+            }finally{
+                session.close();
+            }
+        }else{
+            //enviar mensaje
+        }
+    }
     
 }
