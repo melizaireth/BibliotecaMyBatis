@@ -21,6 +21,14 @@ public class ReservaVO {
         this.fecha_devolucion = fecha_devolucion;
         this.penalizacion = penalizacion;
     }
+    public ReservaVO(String dni) {
+        this.dni = dni;        
+    }
+     public ReservaVO(String dni, String isbn, Date fecha_solicitud) {
+        this.dni = dni;        
+        this.isbn_libro = isbn;
+        this.fecha_solicitud = fecha_solicitud;
+    }
 
     public String getDni() {
         return dni;

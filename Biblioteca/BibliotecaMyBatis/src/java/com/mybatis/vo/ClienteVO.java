@@ -14,6 +14,7 @@ public class ClienteVO {
     private String movil;
     
     public ClienteVO() {
+        
     }
 
     public ClienteVO(String dni, String nombre, String primer_apellido, String segundo_apellido) {
