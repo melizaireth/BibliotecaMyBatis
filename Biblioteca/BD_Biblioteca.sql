@@ -15,7 +15,7 @@ CREATE TABLE `libro` (
   `fecha_publicacion` date DEFAULT NULL,
   `categoria` varchar(45) NOT NULL,
   `total_copias` int(11) DEFAULT '1',
-  `pestamos` int(11) DEFAULT '0',
+  `prestamos` int(11) DEFAULT '0',
   PRIMARY KEY (`isbn`),
   UNIQUE KEY `isbn_UNIQUE` (`isbn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
