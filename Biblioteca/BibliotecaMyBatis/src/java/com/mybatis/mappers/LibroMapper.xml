@@ -14,4 +14,7 @@
     <update id="updateCantLibro" parameterType="com.mybatis.vo.LibroVO">
         update libro set total_copias=#{total_copias} where isbn=#{isbn}
     </update>
+    <update id="updatePrestamo" parameterType="com.mybatis.vo.LibroVO">
+        update libro set prestamos=#{prestamos} where isbn=#{isbn}
+    </update>
 </mapper>
