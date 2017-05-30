@@ -5,19 +5,13 @@
  */
 package com.mbeans;
 
-import com.mybatis.MapperUtil;
 import com.mybatis.bo.LibroBO;
 import com.mybatis.vo.LibroVO;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
@@ -88,6 +82,7 @@ public class LibroBeans {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
              
         System.out.println("Fecha Publicación: "+format.format(libro.getFecha_publicacion()));
+        
         
         
         lbo.nuevoLibro(libro);
