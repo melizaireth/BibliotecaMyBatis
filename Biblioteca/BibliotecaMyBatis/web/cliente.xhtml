@@ -14,14 +14,16 @@
             <h1>Bibloteca Pública de la Nación</h1>
             </h:panelGrid>
         </header>
-        <br/><br/>
-        <h:form id="formCliente">
-            <p:breadCrumb>
+        <p:breadCrumb>
             <p:menuitem value="Libros" url="/index.xhtml" />
             <p:menuitem value="Reserva" url="/reserva.xhtml" />
             <p:menuitem value="Clientes" url="/cliente.xhtml" />            
         </p:breadCrumb>
-        <h1>Nuevo Cliente</h1>
+        <br/><br/>
+        <p:panel header="Nuevo Cliente" style="margin-bottom:20px">
+        <h:form id="formCliente">
+
+        
         <p:panelGrid columns="2">
             <h:outputText value="DNI(*):"/>
             <p:inputText value="#{clienteBeans.cliente.dni}" required="true" requiredMessage="El DNI es obligartorio">
@@ -42,11 +44,12 @@
             </p:inputText>
             <h:outputText value="Movil(*):"/>
             <p:inputText value="#{clienteBeans.cliente.movil}" required="true" requiredMessage="El nro de movil es obligatorio" />
-            <p:commandButton value="Guardar" update="formCliente" actionListener="#{clienteBeans.nuevoCLiente()}"></p:commandButton>
+            <p:commandButton value="Guardar" update="formCliente" actionListener="#{clienteBeans.nuevoCLiente()}"/>
             
         </p:panelGrid>
         <p:messages closable="true" showDetail="true" showSummary="true"/>
         </h:form>
+        </p:panel>
     </h:body>
 </html>
 

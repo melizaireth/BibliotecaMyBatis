@@ -2,7 +2,8 @@
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Reserva</title>
     </h:head>
@@ -14,16 +15,92 @@
             </h:panelGrid>
         </header>
         <br/><br/>
-        <h:form>
+        <h:form id="reserva1">
         <p:breadCrumb>
             <p:menuitem value="Libros" url="/index.xhtml" />
             <p:menuitem value="Reserva" url="/reserva.xhtml" />
             <p:menuitem value="Clientes" url="/cliente.xhtml" />            
         </p:breadCrumb>
-        <p:panelGrid columns="2">
-            <h:outputText value="Reserva:"/>            
+            <br/>
+        <br/>
+             
+            <br/>
+        
+        <p:panelGrid columns="3">
+            <h:outputText value="DNI:"/>  
+            <h:outputText value="ISBN:"/>  
+            <h:outputText />  
+            <p:inputText value="#{reserva.dni}" />
+            <p:inputText value="#{reserva.isbn}" />
+            
+            <p:commandButton id="iconOnly"  icon="ui-icon-search" title="Icon Only">    
+                <f:ajax execute="@form" render=":reserva2" listener="#{reserva.buscarCliente}"/>
+            </p:commandButton>
         </p:panelGrid>
             </h:form>
+        
+        <br/>
+        <br/>
+         <p:panel header="Reserva de Libros" style="margin-bottom:20px">
+        <h:form id="reserva2" >
+            <p:panelGrid columns="3" >
+                
+            <h:outputText value="Nombre:"/>           
+            <h:outputText value="Primer Apellido:"/>
+            <h:outputText value="Segundo Apellido:"/>
+            
+            <p:inputText  value="#{reserva.cliente.nombre}"/>
+            <p:inputText  value="#{reserva.cliente.primer_apellido}"/>           
+            <p:inputText  value="#{reserva.cliente.segundo_apellido}"/>
+              
+            <h:outputText value="DNI:"/>
+            <h:outputText value="Correo Electrónico:"/>
+            <h:outputText value="Movil:"/>
+            
+            <p:inputText value="#{reserva.cliente.dni}"/>
+            <p:inputText value="#{reserva.cliente.email}"/>
+            <p:inputText value="#{reserva.cliente.movil}"/>
+            
+            <h:outputText value="ISBN:"/>
+            <h:outputText value="Nombre del Libro:"/>
+            <h:outputText value="Autor:"/>
+            
+            
+            <p:inputText value="#{reserva.libro.isbn}" />            
+            <p:inputText value="#{reserva.libro.nombre_libro}"/>
+            <p:inputText value="#{reserva.libro.autor}" />
+              
+            <h:outputText value="Fecha Publicacion:"/>
+            <h:outputText value="Categoría:"/>
+            <h:outputText value="Total de Ejemplares Actuales:"/>
+            <p:inputText value="#{reserva.libro.fecha_publicacion}">
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+            </p:inputText>
+            <p:inputText value="#{reserva.libro.nombre_libro}"/>
+            <p:inputText value="#{reserva.libro.autor}"/>
+           <br/>
+            <p:commandButton value="Reservar" update=":reserva2:msn" oncomplete="PF('reservaDialog').show()">               
+                <f:ajax execute="@form" listener="#{reserva.reservarLibro}"/>
+            </p:commandButton>
+           <br/>
+         
+            </p:panelGrid>
+            <p:dialog header="Reserva Info" widgetVar="reservaDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+               
+                <p:outputPanel id="msn" style="text-align:center;">
+                    <p:panelGrid  columns="2" columnClasses="label,value">
+                        <f:facet name="header">
+                            <p:graphicImage url="imagenes/libro.jpg" /> 
+                        </f:facet>
+                        <h:outputText value="DNI:" />
+                        <h:outputText value="#{reserva.cliente.dni}" />
+                        <h:outputText value="ISBN" />
+                        <h:outputText value="#{reserva.libro.isbn}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+         </p:panel>
     </h:body>
 </html>
 
